@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+const validateProfileInout = require('../../validation/profile');
+
 // Load Models
 const Profiel = require('../../models/Profile');
 const User = require('../../models/User');
@@ -23,6 +25,7 @@ router.get(
 
     Profiel
       .findOne({ user: req.user.id })
+      .populate('user', ['name', 'avatar'])
       .then(profile => {
         if (!profile) {
           errors.noprofile = 'There is no profile for this user';
@@ -41,6 +44,12 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateProfileInout(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     // Get fields
     const profileFields = {};
 
@@ -72,6 +81,9 @@ router.post(
 
     profileFields.social = {};
 
+    if (req.body.facebook) {
+      profileFields.social.facebook = req.body.facebook;
+    }
     if (req.body.youtube) {
       profileFields.social.youtube = req.body.youtube;
     }
@@ -98,7 +110,7 @@ router.post(
         } else {
           // Create
           Profile
-            .findOne({ handle: profileFields.handle})
+            .findOne({ handle: profileFields.handle })
             .then(profile => {
               if (profile) {
                 errors.handle = 'That handle already exist';
