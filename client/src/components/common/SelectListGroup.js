@@ -2,7 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 
 const SelectListGroup = (props) => {
-	const selectOntions = options.map(option => (
+	const selectOntions = props.options.map(option => (
 		<option key={option.label} value={option.value}>
 			{option.label}
 		</option>
