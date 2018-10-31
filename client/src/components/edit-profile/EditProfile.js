@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
@@ -178,6 +178,7 @@ class EditProfile extends React.Component {
 				<div className = "container" >
 					<div className="row">
 						<div className="col-md-8 m-auto">
+							<Link to="/dashboard" className="btn btn-light">Go Back</Link>
 							<h1 className="display-4 text-center">Create Your Profile</h1>
 							<p className="lead text-center">Let's get some information to make you profile stand out</p>
 							<small className="d-block pb-3">* - required fields</small>
