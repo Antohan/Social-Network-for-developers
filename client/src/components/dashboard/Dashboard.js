@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import ProfileActions from './ProfileActions';
+import Experience from './Experience';
 
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
@@ -30,6 +31,7 @@ class Dashboard extends React.Component {
           <div>
             <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
             <ProfileActions />
+            <Experience experience={profile.experience} />
             {/* TODO exp and edu */}
             <div style={{marginBottom: '60px'}} />
             <button
