@@ -2,12 +2,18 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getCurrentProfile } from '../../actions/profileActions';
+import ProfileActions from './ProfileActions';
+
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+
+  onDeleteClick = () => {
+    this.props.deleteAccount();
+  };
 
   render() {
     const { user } = this.props.auth;
@@ -20,7 +26,19 @@ class Dashboard extends React.Component {
     } else {
       // Check if logged user has profile data
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>
+        dashboardContent = (
+          <div>
+            <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
+            <ProfileActions />
+            {/* TODO exp and edu */}
+            <div style={{marginBottom: '60px'}} />
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={this.onDeleteClick}
+              >Delete My Account</button>
+          </div>
+        );
       } else {
         // User is logged but has no profile
         dashboardContent = (
@@ -55,4 +73,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
