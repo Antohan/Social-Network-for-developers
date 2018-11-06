@@ -38,7 +38,6 @@ class Post extends React.Component {
               </Link>
               {postContent}
             </div>
-            post
           </div>
         </div>
       </div>

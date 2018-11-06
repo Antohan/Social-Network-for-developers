@@ -1,10 +1,14 @@
 import * as React from 'react';
 
+import CommentItem from './CommentItem';
+
 class CommentFeed extends React.Component {
   render() {
-    return (
-      <div>CommentFeed</div>
-    );
+    const { comments, postId } = this.props;
+
+    return comments.map(comment => (
+      <CommentItem key={comment._id} comment={comment} postId={postId} />
+    ));
   }
 }
 
