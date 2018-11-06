@@ -24,7 +24,7 @@ class Navbar extends React.Component {
         </li>
         <li className="nav-item">
           <a
-            href=""
+            href="/login"
             onClick={this.onLogoutClick}
             className="nav-link">
             <img
