@@ -1,7 +1,7 @@
 {
   "name": "mern",
   "version": "1.0.0",
-  "description": "",
+  "description": "By course from Packpub",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
